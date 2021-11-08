@@ -22,11 +22,14 @@ class LoginUsers:
     # //// FLASH ///////////////////////////////////////////////////////////
 
     @staticmethod
-    def validate_user_create_data(data:dict):
+    def validate_login_user_create_data(data:dict):
         is_valid = True
         # //// Validate User Name ///////
-        if len(data['name']) < 3:
-            flash("Name must be at least 3 characters in length","error_user_name")
+        if len(data['first_name']) < 2:
+            flash("Name must be at least 2 characters in length","error_login_user_first_name")
+            is_valid = False
+        if len(data['last_name']) < 2:
+            flash("Name must be at least 2 characters in length","error_login_user_last_name")
             is_valid = False
         # //// Validate User Email ////////
         if not EMAIL_REGEX.match(data['email']):

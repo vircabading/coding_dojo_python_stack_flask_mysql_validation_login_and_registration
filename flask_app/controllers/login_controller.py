@@ -23,10 +23,14 @@ def registration_post():
         **request.form
     }
     print(session)
-    return redirect("/")
+    return redirect("/registration")
 
 
 # //// CREATE ////////////////////////////////////
+
+@app.route('/registration')
+def registration():
+    return render_template("registration_success.html")
 
 # @app.route('/post', methods=['POST'])                         # Retrieve the input values from create form
 # def post():
