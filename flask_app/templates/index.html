@@ -13,12 +13,10 @@
   <header>
     <div class="navbar navbar-dark bg-dark box-shadow">
       <div class="container d-flex justify-content-between">
-        <a href="" class="navbar-brand d-flex align-items-center text-warning">
-          <h1>
-            <strong>LogIn and Registration</strong>
-          </h1>
+        <a href="" class="navbar-brand d-flex align-items-center">
+            <strong class="text-warning">LogIn and Registration</strong>
         </a>
-        <a class="btn btn-secondary" href="/">HOME</a>
+        <a class="btn btn-secondary " href="/">HOME</a>
       </div>
     </div>
   </header>
@@ -30,8 +28,33 @@
         <!-- //// LEFT COLUMN //////////////////////////////////// -->
         <div class="col-5 bg-dark rounded">
           <h1 class="text-primary md-3">
-            Resgister
+            Register
           </h1>
+          <hr>
+          <form action='/registration/post' method='post'>
+            <div class="form-group mb-2">
+              <label class="form-label" for="first_name">First Name:</label>
+               <input class="form-control" type="text" id="first_name" name="first_name">
+            </div>
+            <div class="form-group mb-2">
+              <label class="form-label" for="last_name">Last Name:</label>
+               <input class="form-control" type="text" id="last_name" name="last_name">
+            </div>
+            <div class="form-group mb-2">
+              <label class="form-label" for="email">Email:</label>
+               <input class="form-control" type="email" id="email" name="email">
+            </div>
+            <div class="form-group mb-2">
+              <label class="form-label" for="password">Password:</label>
+               <input class="form-control" type="password" id="password" name="password">
+            </div>
+            <div class="form-group mb-2">
+              <label class="form-label" for="confirm_password">Confirm Password:</label>
+               <input class="form-control" type="password" id="confirm_password" name="confirm_password">
+            </div>
+            <hr>
+            <input class="btn btn-primary mb-3" type="submit" value="Register">
+          </form>
         </div>
         <div class="col-1">
           <!-- GUTTER -->
@@ -41,6 +64,19 @@
           <h1 class="text-success md-3">
             Log In
           </h1>
+          <hr>
+          <form action='/login/post' method='post'>
+            <div class="form-group mb-2">
+              <label class="form-label" for="email">Email:</label>
+               <input class="form-control" type="email" id="email" name="email">
+            </div>
+            <div class="form-group mb-2">
+              <label class="form-label" for="passsword">Password:</label>
+               <input class="form-control" type="password" id="password" name="password">
+            </div>
+            <hr>
+            <input class="btn btn-success" type="submit" value="Log In">
+          </form>
         </div>
       </div>
     </div>

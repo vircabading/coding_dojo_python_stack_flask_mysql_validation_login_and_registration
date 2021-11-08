@@ -5,7 +5,7 @@
 from flask_app import app
 from flask import render_template, session, redirect, request
 import flask_app
-from flask_app.models import users_model
+from flask_app.models import login_model
 
 # //// SHOW /////////////////////////////////////
 
@@ -13,6 +13,17 @@ from flask_app.models import users_model
 def root():
     print("******** in index *******************")
     return render_template("index.html")
+
+# //// FORM POST /////////////////////////////////
+
+@app.route('/registration/post', methods=['POST'])
+def registration_post():
+    print("**** In Registration POST ****")
+    session = {
+        **request.form
+    }
+    print(session)
+    return redirect("/")
 
 
 # //// CREATE ////////////////////////////////////
