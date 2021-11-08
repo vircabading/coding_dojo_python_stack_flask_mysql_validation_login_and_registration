@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>Users Database</title>
+</head>
+<body>
+  <!-- //// HEADER //////// -->
+  <header>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+      <div class="container d-flex justify-content-between">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <strong>Users Database</strong>
+        </a>
+        <a class="btn btn-secondary" href="/users">HOME</a>
+      </div>
+    </div>
+  </header>
+  
+  <!-- //// MAIN AREA //////// -->
+  <main role="main">
+    <div class="container">
+      <h1>
+        User {{ user.id }}
+      </h1>
+      <table class="table ">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th>Last Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.first_name }}  {{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.created_at }}</td>
+            <td>{{ user.updated_at }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <div class="d-flex">
+        <a class="btn btn-primary" href="/users/{{user.id}}/update">Edit User</a>
+        <a class="btn btn-danger" href="/users/{{user.id}}/delete">Delete User</a>
+      </div>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

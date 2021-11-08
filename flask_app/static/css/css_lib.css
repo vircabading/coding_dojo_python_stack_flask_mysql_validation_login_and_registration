@@ -1,0 +1,179 @@
+/*  //////////////////////////////////////////////////
+    Subj:       Coding Dojo > Web Fundamentals > CSS: CSS Library
+    By:         Virgilio D. Cabading Jr.
+    ////////////////////////////////////////////////// */
+
+/* ////  Browser Reset ////////////////////// */
+* {                                
+    font-family: Arial, Helvetica, sans-serif;                     
+    border: 0 none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* //// Button ////////////////////////////////////////////////////// */
+
+.btn {                              
+    background:none;
+    padding: 0px 10px;
+    /* border-style: solid;
+    border-width: 2px; */
+    border-radius: 5px;
+    /* box-shadow: 5px 5px 4px black; */
+}
+
+.btn:hover, .btn:active {
+    font-weight: bold;
+    cursor: pointer;;
+}
+
+.btn:active {
+    transform: translateY(3px);
+    box-shadow: 2px 1px 1px black;
+}
+
+/*  //// NAV BAR ///////////////////////////////////////////////////// */
+
+.nav {                                      /* Navigation bar */
+    background: navy;                      
+    display: flex;                          /* Nav Bar is a container */
+    align-items: center;
+}
+
+/*  //// Flex Box ////////////////////////////////////////////////// */
+
+body {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.main_container {
+    width: 80%;
+}
+
+.card {
+    border-style: solid;
+    border-width: 2px;
+}
+
+.header {
+    background-color: dodgerblue;
+}
+
+/*      ---- Flex Direction ---------------------------------------- */
+
+.container {
+    display: flex;
+}
+
+.flex-right {
+    flex-direction: row;
+}
+
+.flex-down {
+    flex-direction: column;
+}
+
+/*      ---- Alignment ---------------------------------------------- */
+
+.align-center {
+    align-items: center;
+}
+
+.align-up {
+    align-items: flex-start;
+}
+
+/*      ---- Justification ------------------------------------------ */
+
+.justify-left {
+    justify-content:flex-start;
+}
+
+.justify-right {
+    justify-content: flex-end;
+}
+
+.justify-space {
+    justify-content: space-around;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+/*  //// Columns ///////////////////////////////////////////////// */
+
+.col-1 {
+    flex: 1;
+}
+
+.col-2 {
+    flex: 2;
+}
+
+.col-3 {
+    flex: 3;
+}
+
+/*  //// WIDTH ///////////////////////////////////////////////////// */
+
+.wdt-100 {
+    width: 100%;
+}
+
+.wdt-90 {
+    width: 90%;
+}
+
+.wdt-70 {
+    width: 70%;
+}
+
+.wdt-50 {
+    width: 50%  ;
+}
+
+.wdt-30 {
+    width: 30%;
+}
+
+/*  //// Generic formating /////////////////////////////////////// */
+
+.bg-blue-steel {
+    background: rgb(2,2,5);
+    background: linear-gradient(0deg, rgba(2,2,5,1) 0%, rgba(42,36,74,1) 66%, rgba(13,13,14,1) 100%);
+}
+
+/* //// PADDING AND MARGINS ////////////////////////////////////// */
+
+.pad-10 {
+    padding: 10px;
+}
+
+.pad-0-10 {
+    padding: 0px 10px;
+}
+
+.margin-10 {
+    margin: 10px;
+}
+
+/*  //// BORDER ////////////////////////////////////////////////// */
+
+.bd-solid {
+    border-style: solid;
+    border-width: 2px;
+}
+
+.db-rounded {
+    border-radius: 10px;
+}
