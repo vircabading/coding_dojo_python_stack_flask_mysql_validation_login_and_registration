@@ -35,22 +35,47 @@
             <div class="form-group mb-2">
               <label class="form-label" for="first_name">First Name:</label>
                <input class="form-control" type="text" id="first_name" name="first_name">
+                {% for message in get_flashed_messages(category_filter='error_login_user_first_name')  %}   <!-- Displays any existing Error Messages-->
+                 <p class="alert alert-danger">
+                   {{ message }}
+                 </p>
+                {% endfor %}
             </div>
             <div class="form-group mb-2">
               <label class="form-label" for="last_name">Last Name:</label>
                <input class="form-control" type="text" id="last_name" name="last_name">
+               {% for message in get_flashed_messages(category_filter='error_login_user_last_name')  %}   <!-- Displays any existing Error Messages-->
+                 <p class="alert alert-danger">
+                   {{ message }}
+                 </p>
+               {% endfor %}
             </div>
             <div class="form-group mb-2">
               <label class="form-label" for="email">Email:</label>
-               <input class="form-control" type="email" id="email" name="email">
+              <input class="form-control" type="email" id="email" name="email">
+              {% for message in get_flashed_messages(category_filter='error_login_user_email')  %}   <!-- Displays any existing Error Messages-->
+                <p class="alert alert-danger">
+                  {{ message }}
+                </p>
+              {% endfor %}
             </div>
             <div class="form-group mb-2">
               <label class="form-label" for="password">Password:</label>
-               <input class="form-control" type="password" id="password" name="password">
+              <input class="form-control" type="password" id="password" name="password">
+              {% for message in get_flashed_messages(category_filter='error_login_user_password')  %}   <!-- Displays any existing Error Messages-->
+                <p class="alert alert-danger">
+                  {{ message }}
+                </p>
+              {% endfor %}
             </div>
             <div class="form-group mb-2">
               <label class="form-label" for="confirm_password">Confirm Password:</label>
-               <input class="form-control" type="password" id="confirm_password" name="confirm_password">
+              <input class="form-control" type="password" id="confirm_password" name="confirm_password">
+              {% for message in get_flashed_messages(category_filter='error_login_user_confirm_password')  %}   <!-- Displays any existing Error Messages-->
+                <p class="alert alert-danger">
+                  {{ message }}
+                </p>
+              {% endfor %}
             </div>
             <hr>
             <input class="btn btn-primary mb-3" type="submit" value="Register">

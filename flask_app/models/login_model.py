@@ -1,10 +1,10 @@
 # import the function that will return an instance of a connection ////////
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-import re
+import re                                                               # Import REGEX
 
-TARGETDATABASE = 'dojo_survey_db'                                               # Designates the database we are using
-TABLENAME = "users"                                                             # Designates the table we are using
+TARGETDATABASE = 'dojo_survey_db'                                       # Designates the database we are using
+TABLENAME = "users"                                                     # Designates the table we are using
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')      # Pattern for email validatiom
 
 # //// USERS CLASS ////////////////////////////////////////////////////////
@@ -24,24 +24,40 @@ class LoginUsers:
     @staticmethod
     def validate_login_user_create_data(data:dict):
         is_valid = True
-        # //// Validate User Name ///////
+        # //// Validate User First Name ///////
         if len(data['first_name']) < 2:
-            flash("Name must be at least 2 characters in length","error_login_user_first_name")
+            flash("First Name must be at least 2 characters in length","error_login_user_first_name")
             is_valid = False
+        elif not data['first_name'].isalpha():
+            flash("First Name must be letters only","error_login_user_first_name")
+            is_valid = False
+
+        # //// Validate User Last Name ////////
         if len(data['last_name']) < 2:
-            flash("Name must be at least 2 characters in length","error_login_user_last_name")
+            flash("Last Name must be at least 2 characters in length","error_login_user_last_name")
             is_valid = False
+        elif not data['last_name'].isalpha():
+            flash("Last Name must be letters only","error_login_user_last_name")
+            is_valid = False
+
         # //// Validate User Email ////////
         if not EMAIL_REGEX.match(data['email']):
-            flash("Invalid email address", "error_user_email")
+            flash("Invalid email address", "error_login_user_email")
             is_valid = False
-        # //// Validate User Comments
-        if len( data['comment'] ) < 3:
-            flash("Comment must ve at least 3 characters in length","error_user_comment")
+        elif LoginUsers.get_one_by_email(data):
+            flash("Invalid email already registered", "error_login_user_email")
             is_valid = False
-        elif len( data['comment'] ) > 255:
-            flash("Comment must be < 255 characters in length", "error_user_comment")
+        
+        # //// Validate Password ////////
+        if len(data['password']) < 8:
+            flash("Password must be at least 8 characters in length", "error_login_user_password")
             is_valid = False
+        
+        # //// Validate Confirm Password ////////
+        if data['password'] != data['confirm_password']:
+            flash("Password and Confirm Password do not match", "error_login_user_confirm_password")
+            is_valid = False
+
         return is_valid
 
     # //// CREATE //////////////////////////////////////////////////////////
@@ -74,6 +90,17 @@ class LoginUsers:
         query = "SELECT * FROM " + TABLENAME +" WHERE id = %(id)s;"
         results = connectToMySQL(TARGETDATABASE).query_db(query, data)  # Call the connectToMySQL function with the target db
                                                                         # result is a list of a single dictionary
+        return cls(results[0])                                          # return an instance of the dictionary
+
+    # **** Get One by Email Class Method **********************************
+    # @Returns: an instance of the class
+    @classmethod
+    def get_one_by_email(cls, data:dict):
+        query = "SELECT * FROM " + TABLENAME +" WHERE email = %(email)s;"
+        results = connectToMySQL(TARGETDATABASE).query_db(query, data)  # Call the connectToMySQL function with the target db
+                                                                        # result is a list of a single dictionary
+        if len(results) == 0:
+            return False
         return cls(results[0])                                          # return an instance of the dictionary
 
     # //// UPDATE //////////////////////////////////////////////////////////

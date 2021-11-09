@@ -2,10 +2,12 @@
 # USERS CONTROLLER
 # ////////////////////////////////////////////////////////
 
+from werkzeug import datastructures
 from flask_app import app
 from flask import render_template, session, redirect, request
-import flask_app
 from flask_app.models import login_model
+from flask_bcrypt import Bcrypt                                         # we are creating an object called bcrypt, 
+bcrypt = Bcrypt(app)                                                    #   which is made by invoking the function Bcrypt with our app as an argument 
 
 # //// SHOW /////////////////////////////////////
 
@@ -16,13 +18,21 @@ def root():
 
 # //// FORM POST /////////////////////////////////
 
-@app.route('/registration/post', methods=['POST'])
+@app.route('/registration/post', methods=['POST'])                      # Function that handles regisstration form data
 def registration_post():
     print("**** In Registration POST ****")
-    session = {
+    data = {
         **request.form
     }
-    print(session)
+    if not login_model.LoginUsers.validate_login_user_create_data(data):    # If a login field is invalid, redirect to root
+        return redirect('/')
+    
+    # **** Start hashing the password ********
+    pw_hash = bcrypt.generate_password_hash(data['password'])
+    print("**** Hashing the password ********")
+    print(pw_hash)
+    data['password']=pw_hash                                            # Save the hashed pwd
+
     return redirect("/registration")
 
 
@@ -30,6 +40,7 @@ def registration_post():
 
 @app.route('/registration')
 def registration():
+    print("**** In registration Creat Login User ****")
     return render_template("registration_success.html")
 
 # @app.route('/post', methods=['POST'])                         # Retrieve the input values from create form
