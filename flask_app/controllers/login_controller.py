@@ -90,13 +90,21 @@ def registration():
 
 # //// RETRIEVE ////////////////////////////////////
 
-@app.route('/dashboard')                                                         # Main Page
+@app.route('/dashboard')                                                    # DASHBOARD
 def Dashboard():
     print("******** in dashboard *******************")
     if not 'lu_id' in session:                                              # Check if user is logged in
         print("User is not logged in, redirect to root login")
         return redirect("/")                                                # If not logged in, redirect to root login
-    return render_template("dashboard.html")
+    data = {
+        'id': session['lu_id']
+    }
+    print("data:")
+    print(data)
+    user = login_model.LoginUsers.get_one(data)                             # Retrive user's info from db and make a user instance
+    print("User:")
+    print(user)
+    return render_template("dashboard.html", user=user)                     # Pass user's info to the Dashboard
 
 # @app.route('/users/')
 # @app.route('/users')                                                    # Read All Users Page
