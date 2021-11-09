@@ -14,7 +14,15 @@ bcrypt = Bcrypt(app)                                                    #   whic
 @app.route('/')                                                         # Main Page
 def root():
     print("******** in index *******************")
+    if 'lu_id' in session:                                              # check if user is logged in
+        print("User is logged in, rerouting to dashboard")
+        return redirect("/dashboard")
     return render_template("index.html")
+
+@app.route('/logout')                                                   # Logout User
+def logout():
+    del session['lu_id']
+    return redirect("/")
 
 # //// FORM POST /////////////////////////////////
 
@@ -28,17 +36,32 @@ def registration_post():
         return redirect('/')
     
     # **** Start hashing the password ********
-    pw_hash = bcrypt.generate_password_hash(data['password'])
-    print("**** Hashing the password ********")
-    print(pw_hash)
-    data['password']=pw_hash                                            # Save the hashed pwd
+    pw_hash = login_model.LoginUsers.generate_password_hash(data['password'])
+    data['password']=pw_hash                                            # Save the hashed password to data
+
+    login_model.LoginUsers.create(data)                                 # Create User in the Login Database
 
     return redirect("/registration")
 
+@app.route('/login/post', methods=['POST'])                             # Function that handles log in form data
+def login_post():
+    print("**** In Login POST ****")
+    data = {
+        **request.form
+    }
+    print(data)
+    if not login_model.LoginUsers.validate_login_user_login_data(data): # Check if login data is valid
+        return redirect("/")                                            # If login is invalid, redirect to root with flash errors
+    else:                                                               # Else login the user
+        user = login_model.LoginUsers.get_one_by_email(data)            # Retrieve user using email
+        print(user.first_name,user.last_name,user.email)
+        session['lu_id'] = user.id                                      # Set Login User ID to user id
+
+    return redirect("/dashboard")
 
 # //// CREATE ////////////////////////////////////
 
-@app.route('/registration')
+@app.route('/registration')                                             # This routh shows a sucessful registration
 def registration():
     print("**** In registration Creat Login User ****")
     return render_template("registration_success.html")
@@ -69,6 +92,14 @@ def registration():
 #     return render_template("user_show.html", user = user, all_users = all_users)
 
 # //// RETRIEVE ////////////////////////////////////
+
+@app.route('/dashboard')                                                         # Main Page
+def Dashboard():
+    print("******** in dashboard *******************")
+    if not 'lu_id' in session:                                              # Check if user is logged in
+        print("User is not logged in, redirect to root login")
+        return redirect("/")                                                # If not logged in, redirect to root login
+    return render_template("dashboard.html")
 
 # @app.route('/users/')
 # @app.route('/users')                                                    # Read All Users Page

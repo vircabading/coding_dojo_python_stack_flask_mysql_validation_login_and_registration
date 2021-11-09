@@ -6,6 +6,10 @@ body {
     color: white;
 }
 
-select>option {
-    color: black;
+.right-nav-bar {
+    display: flex;
+}
+
+.right-nav-bar>* {
+    margin: 0px 1%;
 }

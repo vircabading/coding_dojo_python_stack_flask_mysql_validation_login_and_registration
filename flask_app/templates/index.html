@@ -93,11 +93,21 @@
           <form action='/login/post' method='post'>
             <div class="form-group mb-2">
               <label class="form-label" for="email">Email:</label>
-               <input class="form-control" type="email" id="email" name="email">
+              <input class="form-control" type="email" id="email" name="email">
+              {% for message in get_flashed_messages(category_filter='error_login_user_login_email')  %}   <!-- Displays any existing Error Messages-->
+                <p class="alert alert-danger">
+                  {{ message }}
+                </p>
+              {% endfor %}
             </div>
             <div class="form-group mb-2">
               <label class="form-label" for="passsword">Password:</label>
-               <input class="form-control" type="password" id="password" name="password">
+              <input class="form-control" type="password" id="password" name="password">
+              {% for message in get_flashed_messages(category_filter='error_login_user_login_password')  %}   <!-- Displays any existing Error Messages-->
+                <p class="alert alert-danger">
+                  {{ message }}
+                </p>
+              {% endfor %}
             </div>
             <hr>
             <input class="btn btn-success" type="submit" value="Log In">
