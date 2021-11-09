@@ -2,12 +2,9 @@
 # USERS CONTROLLER
 # ////////////////////////////////////////////////////////
 
-from werkzeug import datastructures
 from flask_app import app
 from flask import render_template, session, redirect, request
 from flask_app.models import login_model
-from flask_bcrypt import Bcrypt                                         # we are creating an object called bcrypt, 
-bcrypt = Bcrypt(app)                                                    #   which is made by invoking the function Bcrypt with our app as an argument 
 
 # //// SHOW /////////////////////////////////////
 

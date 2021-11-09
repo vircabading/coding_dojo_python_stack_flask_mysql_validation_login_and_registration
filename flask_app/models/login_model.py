@@ -83,17 +83,10 @@ class LoginUsers:
             flash("Password must be at least 8 characters in length", "error_login_user_login_password")
             is_valid = False
         
-        # print("***** in validate login user login data *****")
-        # print("login_user password")
-        # print(login_user.password)
-        # print("data password")
-        # print(data['password'])
-        # print("bcrypt")
-        # print(bcrypt.check_password_hash(login_user.password, data['password']))
-        
-        if not bcrypt.check_password_hash(login_user.password, data['password']):
-            flash("Invalid Email Password Combination", "error_login_user_login_password")
-            is_valid = False
+        if is_valid:
+            if not bcrypt.check_password_hash(login_user.password, data['password']):
+                flash("Invalid Email Password Combination", "error_login_user_login_password")
+                is_valid = False
         
         return is_valid
 
